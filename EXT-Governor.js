@@ -9,24 +9,7 @@ Module.register("EXT-Governor", {
     defaults: {
       debug: true,
       sleeping: "powersave",
-      working: "ondemand",
-      NPMCheck: {
-        useChecker: true,
-        delay: 10 * 60 * 1000,
-        useAlert: true
-      }
-    },
-
-    socketNotificationReceived: function (notification, payload) {
-      switch(notification) {
-        case "WARNING":
-          this.sendNotification("EXT_ALERT", {
-            type: "warning",
-            message: "Error When Loading: " + payload.library + ". Try to solve it with `npm run rebuild` in EXT-Governor directory",
-            timer: 10000
-          })
-          break
-      }
+      working: "ondemand"
     },
 
     notificationReceived: function (notification, payload) {
