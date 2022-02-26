@@ -10,7 +10,6 @@ logGOV = (...args) => { /* do nothing */ }
 module.exports = NodeHelper.create({
 
   start: function() {
-    this.lib = {}
     this.governor = null
   },
 
