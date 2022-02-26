@@ -1,14 +1,13 @@
 {
   "name": "EXT-Governor",
   "version": "1.0.0",
-  "rev": "220213",
+  "rev": "220226",
   "description": "GA EXT CPU Governor Module",
-  "main": "EXT-Pir.js",
+  "main": "EXT-Governor.js",
   "scripts": {
     "preinstall": "installer/preinstall.sh",
     "postinstall": "installer/postinstall.sh",
-    "update": "installer/update.sh",
-    "rebuild": "installer/rebuild.sh"
+    "update": "installer/update.sh"
   },
   "keywords": [
     "magic mirror",
@@ -18,8 +17,7 @@
     "GoogleAssistant"
   ],
   "dependencies": {
-    "@bugsounet/governor": "^1.0.3",
-    "@bugsounet/npmcheck": "^0.9.96"
+    "@bugsounet/governor": "^1.0.3"
   },
   "repository": {
     "type": "git",
