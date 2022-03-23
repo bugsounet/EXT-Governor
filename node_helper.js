@@ -1,10 +1,10 @@
 /**********************************
 * node_helper for EXT-Governor v1 *
-* BuGsounet ©02/22                *
+* BuGsounet ©03/22                *
 **********************************/
 
 const NodeHelper = require('node_helper')
-const CPUGovernor = require("@bugsounet/governor")
+const CPUGovernor = require("./lib/GovernorLib.js")
 logGOV = (...args) => { /* do nothing */ }
 
 module.exports = NodeHelper.create({
