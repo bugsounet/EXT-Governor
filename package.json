@@ -1,7 +1,7 @@
 {
   "name": "EXT-Governor",
-  "version": "1.0.0",
-  "rev": "220226",
+  "version": "1.0.1",
+  "rev": "220323",
   "description": "GA EXT CPU Governor Module",
   "main": "EXT-Governor.js",
   "scripts": {
@@ -16,9 +16,6 @@
     "EXT",
     "GoogleAssistant"
   ],
-  "dependencies": {
-    "@bugsounet/governor": "^1.0.3"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/bugsounet/EXT-Governor"
@@ -28,5 +25,8 @@
   "bugs": {
     "url": "https://forum.bugsounet.fr/"
   },
-  "homepage": "https://wiki.bugsounet.fr/en/EXT-Governor"
+  "homepage": "https://wiki.bugsounet.fr/en/EXT-Governor",
+  "dependencies": {
+    "child_process": "^1.0.2"
+  }
 }
