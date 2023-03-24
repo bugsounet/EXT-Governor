@@ -40,11 +40,13 @@ module.exports = NodeHelper.create({
         if (result.error) console.error("[GOVERNOR] Error:", result.error)
     }
     var governorConfig= {
+      debug: this.config.debug,
       useCallback: true,
       sleeping: this.config.sleeping,
       working: this.config.working
     }
-    this.governor = new CPUGovernor(governorConfig, callback, this.config.debug)
+    this.governor = new CPUGovernor(governorConfig, callback)
     this.governor.start()
+    this.sendSocketNotification("INITIALIZED")
   }
 });

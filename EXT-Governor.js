@@ -5,7 +5,7 @@
 ******************/
 
 Module.register("EXT-Governor", {
-  requiresVersion: "2.18.0",
+  requiresVersion: "2.22.0",
   defaults: {
     debug: false,
     sleeping: "powersave",
@@ -14,11 +14,8 @@ Module.register("EXT-Governor", {
 
   notificationReceived: function (notification, payload, sender) {
     switch(notification) {
-      case "DOM_OBJECTS_CREATED":
-        this.sendSocketNotification("INIT", this.config)
-        break
-      case "GAv5_READY":
-        if (sender.name == "MMM-GoogleAssistant") this.sendNotification("EXT_HELLO", this.name)
+      case "GW_READY":
+        if (sender.name == "Gateway") this.sendSocketNotification("INIT", this.config)
         break
       case "EXT_GOVERNOR-WORKING":
         this.sendSocketNotification("WORKING")
@@ -27,6 +24,10 @@ Module.register("EXT-Governor", {
         this.sendSocketNotification("SLEEPING")
         break
     }
+  },
+
+  socketNotificationReceived: function(notification, payload) {
+    if (notification == "INITIALIZED") this.sendNotification("EXT_HELLO", this.name)
   },
 
   getDom: function () {
