@@ -4,19 +4,13 @@
 **********************************/
 
 const NodeHelper = require('node_helper')
-const CPUGovernor = require("./lib/GovernorLib.js")
+const CPUGovernor = require("./components/GovernorLib.js")
 logGOV = (...args) => { /* do nothing */ }
 
 module.exports = NodeHelper.create({
 
   start: function() {
     this.governor = null
-  },
-
-  initialize: async function() {
-    if (this.config.debug) logGOV = (...args) => { console.log("[GOVERNOR]", ...args) }
-    console.log("[GOVERNOR] EXT-Governor Version:", require('./package.json').version, "rev:", require('./package.json').rev )
-    this.Governor()
   },
 
   socketNotificationReceived: function (notification, payload) {
@@ -32,6 +26,12 @@ module.exports = NodeHelper.create({
         if (this.governor) this.governor.sleeping()
         break
     }
+  },
+
+  initialize: function() {
+    if (this.config.debug) logGOV = (...args) => { console.log("[GOVERNOR]", ...args) }
+    console.log("[GOVERNOR] EXT-Governor Version:", require('./package.json').version, "rev:", require('./package.json').rev )
+    this.Governor()
   },
 
   Governor: function () {

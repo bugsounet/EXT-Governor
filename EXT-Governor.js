@@ -1,7 +1,7 @@
 /******************
 *  EXT-Governor v1
 *  ©Bugsounet
-*  02/2022
+*  03/2022
 ******************/
 
 Module.register("EXT-Governor", {
@@ -12,11 +12,16 @@ Module.register("EXT-Governor", {
     working: "ondemand"
   },
 
+  start: function() {
+    this.ready = false
+  },
+
   notificationReceived: function (notification, payload, sender) {
+    if (notification == "GW_READY") {
+      if (sender.name == "Gateway") this.sendSocketNotification("INIT", this.config)
+    }
+    if (!this.ready) return
     switch(notification) {
-      case "GW_READY":
-        if (sender.name == "Gateway") this.sendSocketNotification("INIT", this.config)
-        break
       case "EXT_GOVERNOR-WORKING":
         this.sendSocketNotification("WORKING")
         break
@@ -27,12 +32,15 @@ Module.register("EXT-Governor", {
   },
 
   socketNotificationReceived: function(notification, payload) {
-    if (notification == "INITIALIZED") this.sendNotification("EXT_HELLO", this.name)
+    if (notification == "INITIALIZED") {
+      this.ready = true
+      this.sendNotification("EXT_HELLO", this.name)
+    }
   },
 
   getDom: function () {
     var dom = document.createElement("div")
     dom.style.display = 'none'
     return dom
-  },
+  }
 });

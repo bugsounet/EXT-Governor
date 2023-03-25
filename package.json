@@ -1,13 +1,15 @@
 {
   "name": "EXT-Governor",
   "version": "1.1.0",
-  "rev": "230324",
+  "rev": "230325",
   "description": "GA EXT CPU Governor Module",
   "main": "EXT-Governor.js",
   "scripts": {
     "preinstall": "installer/preinstall.sh",
     "postinstall": "installer/postinstall.sh",
-    "update": "installer/update.sh"
+    "update": "installer/update.sh",
+    "reset": "git reset --hard",
+    "clean": "rm -rf node_modules package-lock.json"
   },
   "keywords": [
     "magic mirror",
@@ -27,6 +29,9 @@
   },
   "homepage": "https://wiki.bugsounet.fr/en/EXT-Governor",
   "dependencies": {
-    "child_process": "^1.0.2"
+    "check-node-version": "^4.2.1",
+    "child_process": "^1.0.2",
+    "glob": "^9.3.2",
+    "minify": "^9.2.0"
   }
 }
