@@ -1,25 +1,27 @@
 /******************
 *  EXT-Governor v1
 *  ©Bugsounet
-*  02/2022
+*  03/2022
 ******************/
 
 Module.register("EXT-Governor", {
-  requiresVersion: "2.18.0",
+  requiresVersion: "2.22.0",
   defaults: {
     debug: false,
     sleeping: "powersave",
     working: "ondemand"
   },
 
+  start: function() {
+    this.ready = false
+  },
+
   notificationReceived: function (notification, payload, sender) {
+    if (notification == "GW_READY") {
+      if (sender.name == "Gateway") this.sendSocketNotification("INIT", this.config)
+    }
+    if (!this.ready) return
     switch(notification) {
-      case "DOM_OBJECTS_CREATED":
-        this.sendSocketNotification("INIT", this.config)
-        break
-      case "GAv5_READY":
-        if (sender.name == "MMM-GoogleAssistant") this.sendNotification("EXT_HELLO", this.name)
-        break
       case "EXT_GOVERNOR-WORKING":
         this.sendSocketNotification("WORKING")
         break
@@ -29,9 +31,16 @@ Module.register("EXT-Governor", {
     }
   },
 
+  socketNotificationReceived: function(notification, payload) {
+    if (notification == "INITIALIZED") {
+      this.ready = true
+      this.sendNotification("EXT_HELLO", this.name)
+    }
+  },
+
   getDom: function () {
     var dom = document.createElement("div")
     dom.style.display = 'none'
     return dom
-  },
+  }
 });

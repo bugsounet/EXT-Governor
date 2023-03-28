@@ -4,19 +4,13 @@
 **********************************/
 
 const NodeHelper = require('node_helper')
-const CPUGovernor = require("./lib/GovernorLib.js")
+const CPUGovernor = require("./components/GovernorLib.js")
 logGOV = (...args) => { /* do nothing */ }
 
 module.exports = NodeHelper.create({
 
   start: function() {
     this.governor = null
-  },
-
-  initialize: async function() {
-    if (this.config.debug) logGOV = (...args) => { console.log("[GOVERNOR]", ...args) }
-    console.log("[GOVERNOR] EXT-Governor Version:", require('./package.json').version, "rev:", require('./package.json').rev )
-    this.Governor()
   },
 
   socketNotificationReceived: function (notification, payload) {
@@ -34,17 +28,25 @@ module.exports = NodeHelper.create({
     }
   },
 
+  initialize: function() {
+    if (this.config.debug) logGOV = (...args) => { console.log("[GOVERNOR]", ...args) }
+    console.log("[GOVERNOR] EXT-Governor Version:", require('./package.json').version, "rev:", require('./package.json').rev )
+    this.Governor()
+  },
+
   Governor: function () {
     var callback= (result) => {
         logGOV("Callback:", result)
         if (result.error) console.error("[GOVERNOR] Error:", result.error)
     }
     var governorConfig= {
+      debug: this.config.debug,
       useCallback: true,
       sleeping: this.config.sleeping,
       working: this.config.working
     }
-    this.governor = new CPUGovernor(governorConfig, callback, this.config.debug)
+    this.governor = new CPUGovernor(governorConfig, callback)
     this.governor.start()
+    this.sendSocketNotification("INITIALIZED")
   }
 });

@@ -3,26 +3,20 @@
 
 const exec = require('child_process').exec
 
-var _log = function() {
-    var context = "[GOVERNOR]"
-    return Function.prototype.bind.call(console.log, console, context)
-}()
-
-var log = function() {
-  //do nothing
-}
+var log = (...args) => { /* do nothing */ }
 
 class GOVERNOR {
-  constructor(config,callback, debug) {
+  constructor(config,callback) {
     this.config = config
-    if (debug == true) log = _log
     this.callback = callback
     this.default = {
+      debug: false,
       useCallback: false,
       sleeping: "powersave",
       working: "ondemand"
     }
     this.config = Object.assign(this.default, this.config)
+    if (this.config.debug == true) log = (...args) => { console.log("[GOVERNOR]", ...args) }
     this.MyGovernor = [ "conservative", "ondemand" , "userspace" , "powersave" , "performance" ]
     this.Governor = {
       "actived" : false,
