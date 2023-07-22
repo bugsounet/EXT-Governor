@@ -1,7 +1,7 @@
 {
   "name": "EXT-Governor",
-  "version": "1.1.0",
-  "rev": "230325",
+  "version": "1.1.1",
+  "rev": "230722",
   "description": "GA EXT CPU Governor Module",
   "main": "EXT-Governor.js",
   "scripts": {
@@ -28,10 +28,11 @@
     "url": "https://forum.bugsounet.fr/"
   },
   "homepage": "https://wiki.bugsounet.fr/en/EXT-Governor",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "dependencies": {
-    "check-node-version": "^4.2.1",
-    "child_process": "^1.0.2",
-    "glob": "^9.3.2",
-    "minify": "^9.2.0"
+    "esbuild": "^0.18.15",
+    "glob": "^10.3.3"
   }
 }
