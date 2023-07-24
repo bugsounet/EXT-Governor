@@ -1,12 +1,12 @@
 {
   "name": "EXT-Governor",
-  "version": "1.1.1",
-  "rev": "230722",
+  "version": "1.1.2",
+  "rev": "230724",
   "description": "GA EXT CPU Governor Module",
   "main": "EXT-Governor.js",
   "scripts": {
     "preinstall": "installer/preinstall.sh",
-    "postinstall": "installer/postinstall.sh",
+    "postinstall": "installer/postinstall.sh -m -b",
     "update": "installer/update.sh",
     "reset": "git reset --hard",
     "clean": "rm -rf node_modules package-lock.json"
@@ -32,7 +32,7 @@
     "node": ">=16.0.0"
   },
   "dependencies": {
-    "esbuild": "^0.18.15",
+    "esbuild": "^0.18.16",
     "glob": "^10.3.3"
   }
 }
