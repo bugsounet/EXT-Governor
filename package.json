@@ -32,7 +32,7 @@
     "node": ">=18"
   },
   "dependencies": {
-    "esbuild": "^0.19.11",
+    "esbuild": "^0.20.0",
     "glob": "^10.3.7"
   }
 }
