@@ -1,46 +1,46 @@
-/******************
-*  EXT-Governor v1
+/****************
+*  EXT-Governor
 *  ©Bugsounet
-*  03/2022
-******************/
+*  02/2024
+****************/
 
 Module.register("EXT-Governor", {
-  requiresVersion: "2.22.0",
+  requiresVersion: "2.25.0",
   defaults: {
     debug: false,
     sleeping: "powersave",
     working: "ondemand"
   },
 
-  start: function() {
-    this.ready = false
+  start () {
+    this.ready = false;
   },
 
-  notificationReceived: function (notification, payload, sender) {
-    if (notification == "GA_READY") {
-      if (sender.name == "MMM-GoogleAssistant") this.sendSocketNotification("INIT", this.config)
+  notificationReceived (notification, payload, sender) {
+    if (notification === "GA_READY") {
+      if (sender.name === "MMM-GoogleAssistant") this.sendSocketNotification("INIT", this.config);
     }
-    if (!this.ready) return
+    if (!this.ready) return;
     switch(notification) {
       case "EXT_GOVERNOR-WORKING":
-        this.sendSocketNotification("WORKING")
-        break
+        this.sendSocketNotification("WORKING");
+        break;
       case "EXT_GOVERNOR-SLEEPING":
-        this.sendSocketNotification("SLEEPING")
-        break
+        this.sendSocketNotification("SLEEPING");
+        break;
     }
   },
 
-  socketNotificationReceived: function(notification, payload) {
-    if (notification == "INITIALIZED") {
-      this.ready = true
-      this.sendNotification("EXT_HELLO", this.name)
+  socketNotificationReceived (notification, payload) {
+    if (notification === "INITIALIZED") {
+      this.ready = true;
+      this.sendNotification("EXT_HELLO", this.name);
     }
   },
 
-  getDom: function () {
-    var dom = document.createElement("div")
-    dom.style.display = 'none'
-    return dom
+  getDom () {
+    var dom = document.createElement("div");
+    dom.style.display = "none";
+    return dom;
   }
 });

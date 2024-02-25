@@ -1,7 +1,7 @@
 {
   "name": "EXT-Governor",
-  "version": "1.2.0",
-  "rev": "240103",
+  "version": "1.3.0",
+  "rev": "240225",
   "description": "GA EXT CPU Governor Module",
   "main": "EXT-Governor.js",
   "scripts": {
@@ -9,7 +9,11 @@
     "postinstall": "installer/postinstall.sh -m -b",
     "update": "installer/update.sh",
     "reset": "git reset --hard",
-    "clean": "rm -rf node_modules package-lock.json"
+    "clean": "rm -rf node_modules package-lock.json",
+    "lint": "eslint *.js installer/*.js components/*.js --config eslint.config.js",
+    "lint:fix": "eslint *.js installer/*.js components/*.js --config eslint.config.js --fix",
+    "test": "npm run lint",
+    "test:minify": "cd installer && node minify.js"
   },
   "keywords": [
     "magic mirror",
@@ -32,7 +36,13 @@
     "node": ">=18"
   },
   "dependencies": {
-    "esbuild": "^0.19.11",
+    "esbuild": "^0.20.1",
     "glob": "^10.3.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^8.57.0",
+    "@stylistic/eslint-plugin": "^1.6.2",
+    "eslint": "^8.57.0",
+    "eslint-plugin-import": "^2.29.1"
   }
 }
