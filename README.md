@@ -1,6 +1,6 @@
 # EXT-Governor - Extented for `MMM-GoogleAssistant`
 
-It allows to allow to control your CPU Governor on start of MagicMirror
+It allows to allow to control your CPU Governor on start of MagicMirror²
 
 The result can be:
  * More reactive when your screen is on
