@@ -1,7 +1,7 @@
 {
   "name": "EXT-Governor",
-  "version": "1.3.0",
-  "rev": "240225",
+  "version": "1.3.1",
+  "rev": "240303",
   "description": "GA EXT CPU Governor Module",
   "main": "EXT-Governor.js",
   "scripts": {
